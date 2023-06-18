@@ -10,15 +10,24 @@ def index(request):
     # con_date = []
     tweet_count = ''
     if request.method == 'GET':
-        username = name = request.GET.get('username')
-        tweet_count = int(request.GET.get('tweet_count'))
-    
+        username = request.GET.get('username')
+        if username == '' or username == None:
+            username = 'No User Found, Aliyar403324241'
+        tweet_count = int(request.GET.get('tweet_count') or 0)
+    print(type(username))
+    print(type(tweet_count))
     query = f'from:{username}'
     tweets = []
     for i,tweet in enumerate(sntwitter.TwitterSearchScraper(query).get_items()):
         tweets.append(tweet)
-        if i+1 == tweet_count:
+        print('Hello')
+        if tweet_count == 0:
+            tweets = []
+            tweets.append('No tweet found')
             break
+        elif i+1 == tweet_count:
+            break
+
 
     # for n in tweets:
     #     content.append(n.user.username)
