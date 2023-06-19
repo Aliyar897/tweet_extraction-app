@@ -14,8 +14,8 @@ def index(request):
         if username == '' or username == None:
             username = 'No User Found, Aliyar403324241'
         tweet_count = int(request.GET.get('tweet_count') or 0)
-    print(type(username))
-    print(type(tweet_count))
+    # print(type(username))
+    # print(type(tweet_count))
     query = f'from:{username}'
     tweets = []
     for i,tweet in enumerate(sntwitter.TwitterSearchScraper(query).get_items()):
@@ -27,13 +27,6 @@ def index(request):
             break
         elif i+1 == tweet_count:
             break
-
-
-    # for n in tweets:
-    #     content.append(n.user.username)
-    #     content.append(n.content)
-    #     content.append(n.date)
-    #     content.append(n.likeCount)
 
 
     context ={
